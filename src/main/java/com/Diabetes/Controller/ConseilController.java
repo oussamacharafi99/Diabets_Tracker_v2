@@ -1,4 +1,4 @@
-package com.Diabetes.Controller;
+
 
 import com.Diabetes.Service.ConseilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,3 +12,4 @@ public class ConseilController {
     private  ConseilsService conseilsService;
 
 }
+
