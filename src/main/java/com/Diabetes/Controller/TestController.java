@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@RequestMapping("/")
 public class TestController {
 
-//    For Show The First Page // 
+//    For Show The First Page //
     @RequestMapping("/")
     public String test(Model model) {
         return "index";
