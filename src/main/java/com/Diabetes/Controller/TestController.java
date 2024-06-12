@@ -2,6 +2,7 @@ package com.Diabetes.Controller;
 
 import com.Diabetes.Models.test;
 import com.Diabetes.Repository.TestRepository;
+import com.Diabetes.Service.TestImp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,14 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/")
 public class TestController {
-    private static final Logger LOG = LoggerFactory.getLogger(TestController.class);
 
     @Autowired
-    private TestRepository TestRepository;
+    TestImp testImp;
 
     @RequestMapping("/")
     public String test(Model model) {
         model.addAttribute("test", new test());
+        testImp.addTest(new test(  "salma"));
         return "index";
     }
 

@@ -1,15 +1,22 @@
 package com.Diabetes.Models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class test {
+
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column
     private String name;
+
+    public test(String name){
+        this.name = name;
+    }
 }
