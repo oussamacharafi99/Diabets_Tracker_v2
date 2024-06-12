@@ -1,12 +1,15 @@
 package com.Diabetes.Models;
 
+
 import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Entity
 @Setter
@@ -15,10 +18,12 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class LectureGlycemie {
-    @Id
+    @Id   
     private Integer id;
     @Column
-    private Integer Valeur;
-
+    private Integer valeur;
+   @Column
+    private LocalDateTime time;
+    
 
 }
