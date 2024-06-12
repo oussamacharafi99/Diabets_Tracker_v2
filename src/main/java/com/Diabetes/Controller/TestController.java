@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-
 public class TestController {
-
-
     @RequestMapping("/")
     public String test(Model model) {
         return "conseilhtml";
