@@ -1,21 +1,26 @@
 package com.Diabetes.Service;
-import com.Diabetes.Models.LectureGlycemie;
+import com.Diabetes.Models.Conseil;
 import com.Diabetes.Repository.ConseilRepositry;
 import com.Diabetes.Repository.LectureGlycemieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.List;
 @Service
 public class ConseilsService {
-    private final ConseilRepositry conseilsRepository;
-    private final LectureGlycemieRepository lectureGlycemieRepository;
-   // private final RepasRepository repasRepository;
+    @Autowired
+      ConseilRepositry conseilRepositry;
+    @Autowired
+    private  LectureGlycemieRepository lectureGlycemieRepository;
 
-    public ConseilsService(ConseilRepositry conseilsRepository, LectureGlycemieRepository lectureGlycemieRepository) {
-        this.conseilsRepository = conseilsRepository;
-        this.lectureGlycemieRepository = lectureGlycemieRepository;
+    public static void addConseil(Conseil ruri) {
     }
+
+
+    // private final RepasRepository repasRepository;
+    
+//@Transactional
+   
+
 //    public void genererConseils(Utilisateur utilisateur) {
 //        List<LectureGlycemie> lectures = lectureGlycemieRepository.findByUtilisateur(utilisateur);
 //        List<Repas> repas = repasRepository.findByUtilisateur(utilisateur);

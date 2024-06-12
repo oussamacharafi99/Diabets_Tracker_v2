@@ -15,13 +15,16 @@ import java.time.LocalDateTime;
 public class Conseil {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private Integer id;
+    @Column
     private String message;
     private LocalDateTime dateHeure;
+    public Conseil(String name){
+        this.message = message;
+    }
 
    // @ManyToOne
     //@JoinColumn(name = "utilisateur_id")
    // private Utilisateur utilisateur;
-
+g
 }
