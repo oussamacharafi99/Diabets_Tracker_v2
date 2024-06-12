@@ -1,17 +1,20 @@
 package com.Diabetes.Controller;
 
-import com.Diabetes.Service.ConseilsService;
+
+import com.Diabetes.Models.Conseil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/conseils")
+@Controller
 public class ConseilController {
-    private final ConseilsService conseilsService;
-    private final UtilisateurRepository utilisateurRepository;
 
-    public ConseilController(ConseilsService conseilsService, UtilisateurRepository utilisateurRepository) {
-        this.conseilsService = conseilsService;
-        this.utilisateurRepository = utilisateurRepository;
+
+    @RequestMapping("/conseil")
+    public String conseil(Model model) {
+        return "conseilhtml";
     }
-}
