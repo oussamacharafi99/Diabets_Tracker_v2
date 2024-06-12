@@ -11,11 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
 public class ConseilController {
 
 
-    @RequestMapping("/")
+    @RequestMapping("/conseil")
     public String conseil(Model model) {
         return "conseilhtml";
     }
