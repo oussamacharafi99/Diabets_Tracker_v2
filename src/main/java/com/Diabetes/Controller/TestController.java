@@ -31,6 +31,11 @@ public class TestController {
 //        test test1 = new test();
 //        return "redirect:/";
 //    }
+    //    @PostMapping("/")
+//    public String View(test test , Model model) {
+//        test test1 = new test();
+//        return "redirect:/";
+//    }
 
 
 }
