@@ -10,13 +10,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 
-@Entity
+
+
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Entity
 public class LectureGlycemie {
     @Id   
     private Integer id;

@@ -20,8 +20,12 @@ public class Programme {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(name = "name")
     private String name;
+
+    @Column(name = "user_id")
+    private Integer user_id;
 
     @Column(name = "startDate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
