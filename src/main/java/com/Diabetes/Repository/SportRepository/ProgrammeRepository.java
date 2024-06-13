@@ -6,5 +6,5 @@ import java.util.List;
 
 @Repository
 public interface ProgrammeRepository extends JpaRepository<Programme, Integer> {
-    List<Programme> findAll(Programme programme);
+
 }
