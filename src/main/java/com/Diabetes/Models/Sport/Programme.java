@@ -38,5 +38,6 @@ public class Programme {
     @Column(name = "endDate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
+
     private String description;
 }
