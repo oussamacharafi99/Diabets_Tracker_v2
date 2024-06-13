@@ -5,9 +5,28 @@
     <title>Title</title>
 </head>
 <body>
-
-<h1>Hello world !</h1>
-
+<h1>Programme and Movements</h1>
+<ul>
+    <li th:each="pm : ${programmeAndMovementsList}">
+        <div>
+            <h2>Programme Details</h2>
+            <p>Programme ID: <span th:text="${pm.programmeId}"></span></p>
+            <p>Programme Name: <span th:text="${pm.programmeName}"></span></p>
+            <p>User ID: <span th:text="${pm.userId}"></span></p>
+            <p>Start Date: <span th:text="${pm.startDate}"></span></p>
+            <p>Hours: <span th:text="${pm.hours}"></span></p>
+            <p>End Date: <span th:text="${pm.endDate}"></span></p>
+            <p>Description: <span th:text="${pm.programmeDescription}"></span></p>
+        </div>
+        <div>
+            <h2>Movement Details</h2>
+            <p>Movement ID: <span th:text="${pm.movementId}"></span></p>
+            <p>Movement Name: <span th:text="${pm.movementName}"></span></p>
+            <p>Image: <img th:src="@{${pm.image}}" alt="Image"/></p>
+            <p>Description: <span th:text="${pm.movementDescription}"></span></p>
+        </div>
+    </li>
+</ul>
 
 </body>
 </html>
