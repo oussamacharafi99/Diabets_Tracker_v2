@@ -50,6 +50,24 @@ public class GlycemieController {
 
         return "redirect:/";
     }
-//
+
+
+
+
+    @RequestMapping("/ShowInfo")
+    public String show(Model model){
+        // model.addAttribute("diabete",new GlucoseReading());
+        model.addAttribute("Diabetes",  Glycemie.ShowDiabetes());
+        return "ShowLectureOfDiabete";
+    }
+
+
+    @RequestMapping("/delete")
+    public String deleteInfos(@RequestParam("id") int idS, Model model) {
+        Glycemie.delete(idS);
+        model.addAttribute("Diabetes",  Glycemie.ShowDiabetes());
+        return "Show";
+    }
+
 
 }

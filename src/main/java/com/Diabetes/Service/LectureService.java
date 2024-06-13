@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+
 @Service
 public class LectureService {
 
@@ -17,4 +19,15 @@ public class LectureService {
     public void addLecture(LectureGlycemie gr) {
         lectureRepository.save(gr);
     }
+    @Transactional
+    public ArrayList<LectureGlycemie> ShowDiabetes() {
+        return (ArrayList<LectureGlycemie>) lectureRepository.findAll();
+
+    }
+    @Transactional
+    public void delete(Integer id) {
+        lectureRepository.deleteById(id);
+    }
+
+
 }
