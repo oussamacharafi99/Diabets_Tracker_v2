@@ -19,3 +19,4 @@ public class ConseilController {
     public String conseil(Model model) {
         return "conseilhtml";
     }
+}
