@@ -47,4 +47,7 @@ public class ServiceSport {
         return movementsRepository.findAll(movements);
     }
 
+    /* Section of Find All From ProgrammeMovements */
+
+
 }
