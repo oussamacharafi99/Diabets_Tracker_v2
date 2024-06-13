@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 public class TestController {
     @RequestMapping("/")
     public String test(Model model) {
-        return "conseilhtml";
+        return
+                "conseilhtml";
     }
 
 
