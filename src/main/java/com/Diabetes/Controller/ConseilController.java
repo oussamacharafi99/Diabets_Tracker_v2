@@ -1,4 +1,5 @@
 package com.Diabetes.Controller;
+
 import com.Diabetes.Models.Conseil;
 import com.Diabetes.Models.Users.User;
 import com.Diabetes.Service.ConseilsService;
@@ -13,7 +14,6 @@ import java.util.List;
 public class ConseilController {
 @Autowired
 ConseilsService conseilsService;
-
 
     @RequestMapping("/conseil")
     public String conseil(Model model) {
@@ -36,7 +36,4 @@ ConseilsService conseilsService;
         conseilsService.supprimerConseil(id);
     }
 }
-
-
-
 
