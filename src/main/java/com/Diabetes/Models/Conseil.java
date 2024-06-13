@@ -24,8 +24,8 @@ public class Conseil {
     private LocalDateTime dateHeure;
 
     @ManyToOne
-    @JoinColumn(name = "utilisateur_id", nullable = false)
-    private User utilisateur;
+    @JoinColumn(name = "glycemie_id", nullable = false)
+    private LectureGlycemie glycemie;
 
     public Conseil(String name){
         this.message = message;

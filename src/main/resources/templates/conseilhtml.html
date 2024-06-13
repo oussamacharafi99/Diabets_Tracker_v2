@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Gestion des Conseils</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-<h1> hello im hajar</h1>
+<div class="container">
+    <h1>Gestion des Conseils</h1>
+
+    <!-- Formulaire pour générer des conseils -->
+    <form id="genererConseilForm" th:action="@{/conseils/generer}" method="post">
+        <div class="form-group">
+            <label for="glycemieId">ID de Glycémie</label>
+            <input type="number" class="form-control" id="glycemieId" name="glycemieId" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Générer Conseils</button>
+    </form>
+
+    <hr>
+
+    <!-- Liste des conseils -->
+    <h2>Liste des Conseils</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Message</th>
+            <th>Date et Heure</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Boucle sur les conseils pour les afficher -->
+        <tr th:each="conseil : ${conseils}">
+            <td th:text="${conseil.id}"></td>
+            <td th:text="${conseil.message}"></td>
+            <td th:text="${conseil.dateHeure}"></td>
+            <td>
+                <!-- Formulaire pour supprimer un conseil -->
+                <form th:action="@{/conseils/{id}(id=${conseil.id})}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- JavaScript Bootstrap & jQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
