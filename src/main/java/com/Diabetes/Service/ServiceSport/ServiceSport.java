@@ -7,11 +7,11 @@ import com.Diabetes.Repository.SportRepository.ProgrammeMovementsRepository;
 import com.Diabetes.Repository.SportRepository.ProgrammeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class ServiceSport {
+
     @Autowired
     ProgrammeMovementsRepository programmeMovementsRepository;
     @Autowired
@@ -23,7 +23,7 @@ public class ServiceSport {
         programmeMovementsRepository.save(programmeMovements);
     }
     public List<ProgrammeMovements> getProMov(ProgrammeMovements programmeMovements) {
-        return programmeMovementsRepository.findAll(programmeMovements);
+        return programmeMovementsRepository.findAll();
     }
     public void updateProMov(ProgrammeMovements programmeMovements) {
         programmeMovementsRepository.save(programmeMovements);
@@ -38,13 +38,15 @@ public class ServiceSport {
         programmeRepository.save(programme);
     }
     public List<Programme> getPro(Programme programme) {
-        return programmeRepository.findAll(programme);
+        return programmeRepository.findAll();
     }
 
     /* Section of Movements */
 
     public List<Movements> getMovements(Movements movements) {
-        return movementsRepository.findAll(movements);
+        return movementsRepository.findAll();
     }
+
+    /* Section of Find All From ProgrammeMovements */
 
 }
