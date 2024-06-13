@@ -1,5 +1,4 @@
 package com.Diabetes.Models.Sport;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
