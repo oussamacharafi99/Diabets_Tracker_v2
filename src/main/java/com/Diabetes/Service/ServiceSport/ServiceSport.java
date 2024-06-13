@@ -1,7 +1,9 @@
 package com.Diabetes.Service.ServiceSport;
+
 import com.Diabetes.Models.Sport.Movements;
 import com.Diabetes.Models.Sport.Programme;
 import com.Diabetes.Models.Sport.ProgrammeMovements;
+import com.Diabetes.Models.Sport.ProgrammeAndMovementsDTO;
 import com.Diabetes.Repository.SportRepository.MovementsRepository;
 import com.Diabetes.Repository.SportRepository.ProgrammeMovementsRepository;
 import com.Diabetes.Repository.SportRepository.ProgrammeRepository;
@@ -12,22 +14,30 @@ import java.util.List;
 
 @Service
 public class ServiceSport {
+
     @Autowired
-    ProgrammeMovementsRepository programmeMovementsRepository;
+    private ProgrammeMovementsRepository programmeMovementsRepository;
     @Autowired
-    ProgrammeRepository programmeRepository;
+    private ProgrammeRepository programmeRepository;
     @Autowired
-    MovementsRepository movementsRepository;
+    private MovementsRepository movementsRepository;
 
     public void saveProMov(ProgrammeMovements programmeMovements) {
         programmeMovementsRepository.save(programmeMovements);
     }
-    public List<ProgrammeMovements> getProMov(ProgrammeMovements programmeMovements) {
-        return programmeMovementsRepository.findAll(programmeMovements);
+
+    public List<ProgrammeAndMovementsDTO> getProgrammeAndMovementsByProgrammeId(Integer programmeId) {
+        return programmeMovementsRepository.findProgrammeAndMovementsByProgrammeId(programmeId);
     }
+
+    public List<ProgrammeMovements> getProMov() {
+        return programmeMovementsRepository.findAll();
+    }
+
     public void updateProMov(ProgrammeMovements programmeMovements) {
         programmeMovementsRepository.save(programmeMovements);
     }
+
     public void deleteProMov(ProgrammeMovements programmeMovements) {
         programmeMovementsRepository.delete(programmeMovements);
     }
@@ -37,14 +47,14 @@ public class ServiceSport {
     public void savePro(Programme programme) {
         programmeRepository.save(programme);
     }
-    public List<Programme> getPro(Programme programme) {
-        return programmeRepository.findAll(programme);
+
+    public List<Programme> getPro() {
+        return programmeRepository.findAll();
     }
 
     /* Section of Movements */
 
-    public List<Movements> getMovements(Movements movements) {
-        return movementsRepository.findAll(movements);
+    public List<Movements> getMovements() {
+        return movementsRepository.findAll();
     }
-
 }
