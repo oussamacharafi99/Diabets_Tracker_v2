@@ -5,3 +5,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ConseilController {
 }
 
+
+
+    @RequestMapping("/conseil")
+    public String conseil(Model model) {
+        return "conseilhtml";
+    }
+}
+

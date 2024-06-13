@@ -1,5 +1,6 @@
 package com.Diabetes.Models;
 
+import com.Diabetes.Models.Users.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,15 +17,19 @@ public class Conseil {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @Column(nullable = false)
     private String message;
+
+    @Column(nullable = false)
     private LocalDateTime dateHeure;
+
+    @ManyToOne
+    @JoinColumn(name = "utilisateur_id", nullable = false)
+    private User utilisateur;
+
     public Conseil(String name){
         this.message = message;
     }
 
-   // @ManyToOne
-    //@JoinColumn(name = "utilisateur_id")
-   // private Utilisateur utilisateur;
 
 }
