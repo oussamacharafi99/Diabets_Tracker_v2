@@ -28,4 +28,8 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public User findById(Long id) {
+        Optional<User> user = userRepository.findById(Math.toIntExact(id));
+        return user.orElseThrow(() -> new RuntimeException("User not found with id " + id));
+    }
 }
