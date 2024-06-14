@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add and Show</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <form method="post" action="save">
+
+
+        <div class="input">
+            <div>
+                <input type="date" name="date_of_Tracking" required>
+            </div>
+            <div>
+                <input type="time" name="time_of_tracking" required>
+            </div>
+            <div>
+                <input type="number" name="value_Glucose" placeholder="Niveau de glucose (mg/dL)" required>
+            </div>
+            <div class="btn2">
+                <button type="submit">
+                    Ajouter <i class="bi bi-plus"></i>
+                </button>
+            </div>
+        </div>
+
+
+
+
+        <div class="container mt-5">
+            <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Valeur Glycemie</th>
+                    <th>Date</th>
+                    <th>Heure</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="glycemie : ${Diabetes}">
+                    <td th:text="${glycemie.getId()}"></td>
+                    <td class="glycemie-value" th:text="${glycemie.getValeur()}"></td>
+                    <td class="glycemie-date" th:text="${glycemie.getDate_of_Tracking()}"></td>
+                    <td th:text="${glycemie.getTime()}"></td>
+
+
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+
+
+    </form>
+</div>
+
+</body>
+</html>

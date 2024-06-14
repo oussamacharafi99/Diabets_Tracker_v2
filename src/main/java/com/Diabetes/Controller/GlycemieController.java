@@ -26,7 +26,8 @@ public class GlycemieController {
     @RequestMapping(value = "/Add")
     public String home(Model model) {
         model.addAttribute("glucose", new LectureGlycemie());
-        return "AddGlycemie";
+        model.addAttribute("Diabetes",  Glycemie.ShowDiabetes());
+        return "Add&ShowGlycemie";
     }
 
     @PostMapping(value = "/save")
@@ -48,7 +49,7 @@ public class GlycemieController {
 
         Glycemie.addLecture(Lecture);
 
-        return "redirect:/";
+        return "redirect:/Add";
     }
 
 
@@ -58,7 +59,7 @@ public class GlycemieController {
     public String show(Model model){
         // model.addAttribute("diabete",new GlucoseReading());
         model.addAttribute("Diabetes",  Glycemie.ShowDiabetes());
-        return "ShowLectureOfDiabete";
+        return "Add&ShowGlycemie";
     }
 
 
