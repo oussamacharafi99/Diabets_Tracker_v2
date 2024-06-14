@@ -3,10 +3,21 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Liste des Valeurs Glycémies</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
             integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        /* Style pour les lignes impaires */
+        .odd-row {
+            background-color: #f2f2f2;
+        }
+
+        /* Style pour les lignes paires */
+        .even-row {
+            background-color: #ffffff;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,11 +35,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="glycemie : ${Diabetes}">
+        <!-- Boucle sur les données de glycémie -->
+        <tr th:each="glycemie, rowStatus : ${Diabetes}"
+            th:class="${rowStatus.odd}? 'odd-row' : 'even-row'">
             <td th:text="${glycemie.getId()}"></td>
             <td class="glycemie-value" th:text="${glycemie.getValeur()}"></td>
             <td class="glycemie-date" th:text="${glycemie.getDate_of_Tracking()}"></td>
             <td th:text="${glycemie.getTime()}"></td>
+            <td><!-- Ajoutez le commentaire si nécessaire --></td>
+            <td><!-- Ajoutez l'ID du diabétique si nécessaire --></td>
         </tr>
         </tbody>
     </table>
