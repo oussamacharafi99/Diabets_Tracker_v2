@@ -69,6 +69,11 @@ public class GlycemieController {
         model.addAttribute("Diabetes",  Glycemie.ShowDiabetes());
         return "Show";
     }
+    @RequestMapping("/pdf")
+    public  String pdfG(Model model){
+        model.addAttribute("Diabetes" ,Glycemie.ShowDiabetes());
+        return "pdf";
+    }
 
 
 }

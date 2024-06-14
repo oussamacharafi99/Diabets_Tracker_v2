@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+            integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
+    <table class="pdfG">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Valeur Glycemie</th>
+            <th>Date</th>
+            <th>Heure</th>
+            <th>Commentaire</th>
+            <th>ID Diabétiques</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="glycemie : ${Diabetes}">
+            <td th:text="${glycemie.getId()}"></td>
+            <td class="glycemie-value" th:text="${glycemie.getValeur()}"></td>
+            <td class="glycemie-date" th:text="${glycemie.getDate_of_Tracking()}"></td>
+            <td th:text="${glycemie.getTime()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <button onclick="generatePdf()">Export PDF</button>
+</div>
+
+<script>
+    function generatePdf() {
+        const pdfElement = document.querySelector('.pdfG');
+        html2pdf().from(pdfElement).save();
+    }
+</script>
+</body>
+
+</html>
