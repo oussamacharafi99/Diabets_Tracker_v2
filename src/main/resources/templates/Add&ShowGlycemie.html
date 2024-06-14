@@ -6,6 +6,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .form-container {
             margin-top: 50px;
@@ -68,6 +69,54 @@
         </tbody>
     </table>
 </div>
+
+<div class="container">
+    <h2>Graphiques des Valeurs Glycémiques</h2>
+    <canvas id="glycemieChart"></canvas>
+    <br/>
+    <button onclick="filterData('week')">Filtrer par Semaine</button>
+    <button onclick="filterData('month')">Filtrer par Mois</button>
+</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let lectures = /*[[${lectures}]]*/ [];
+    let labels = lectures.map(lecture => lecture.date_of_Tracking);
+    let values = lectures.map(lecture => lecture.valeur);
+
+    let ctx = document.getElementById('glycemieChart').getContext('2d');
+    let glycemieChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Niveau de Glycémie',
+                data: values,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day'
+                    }
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    function filterData(type) {
+        window.location.href = `/filter?type=${type}`;
+    }
+    /*]]>*/
+</script>
+
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
