@@ -1,4 +1,4 @@
-// LectureService.java
+
 package com.Diabetes.Service;
 
 import com.Diabetes.Models.LectureGlycemie;
