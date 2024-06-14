@@ -1,10 +1,47 @@
+
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
+
+
     <title>Title</title>
 </head>
 <body>
-heuuuuuuufcz dfqchdhfdjhs
+
+
+
+
+<div class="container mt-5">
+    <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Valeur Glycemie</th>
+            <th>Date</th>
+            <th>Heure</th>
+            <th>Commentaire</th>
+            <th>ID Diabétiques</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="glycemie : ${Diabetes}">
+            <td th:text="${glycemie.getId()}"></td>
+            <td class="glycemie-value" th:text="${glycemie.getValeur()}"></td>
+            <td class="glycemie-date" th:text="${glycemie.getDate_of_Tracking()}"></td>
+            <td th:text="${glycemie.getTime()}"></td>
+
+
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
 </body>
 </html>
