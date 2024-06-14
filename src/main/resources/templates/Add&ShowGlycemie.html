@@ -1,73 +1,76 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Add and Show</title>
+    <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    <style>
+        .form-container {
+            margin-top: 50px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .btn-custom {
+            background-color: #4CAF50; /* Custom green color */
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-
-<div class="container">
-
+<!-- Form Section -->
+<div class="container form-container">
     <form method="post" action="save">
-
-
-        <div class="input">
-            <div>
-                <input type="date" name="date_of_Tracking" required>
-            </div>
-            <div>
-                <input type="time" name="time_of_tracking" required>
-            </div>
-            <div>
-                <input type="number" name="value_Glucose" placeholder="Niveau de glucose (mg/dL)" required>
-            </div>
-            <div class="btn2">
-                <button type="submit">
-                    Ajouter <i class="bi bi-plus"></i>
-                </button>
-            </div>
+        <div class="form-group">
+            <label for="date_of_tracking">Date de suivi</label>
+            <input type="date" class="form-control" id="date_of_tracking" name="date_of_tracking" required>
         </div>
-
-
-
-
-        <div class="container mt-5">
-            <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Valeur Glycemie</th>
-                    <th>Date</th>
-                    <th>Heure</th>
-
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="glycemie : ${Diabetes}">
-                    <td th:text="${glycemie.getId()}"></td>
-                    <td class="glycemie-value" th:text="${glycemie.getValeur()}"></td>
-                    <td class="glycemie-date" th:text="${glycemie.getDate_of_Tracking()}"></td>
-                    <td th:text="${glycemie.getTime()}"></td>
-
-
-                </tr>
-
-                </tbody>
-            </table>
-
+        <div class="form-group">
+            <label for="time_of_tracking">Heure de suivi</label>
+            <input type="time" class="form-control" id="time_of_tracking" name="time_of_tracking" required>
         </div>
-
-
-
-
-
+        <div class="form-group">
+            <label for="value_glucose">Niveau de glucose (mg/dL)</label>
+            <input type="number" class="form-control" id="value_glucose" name="value_glucose" placeholder="Niveau de glucose (mg/dL)" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-custom">
+                Ajouter <i class="bi bi-plus"></i>
+            </button>
+        </div>
     </form>
 </div>
 
+<!-- Table Section -->
+<div class="container mt-5">
+    <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Valeur Glycémie</th>
+            <th>Date</th>
+            <th>Heure</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="glycemie : ${Diabetes}">
+            <td th:text="${glycemie.getId()}"></td>
+            <td class="glycemie-value" th:text="${glycemie.getValeur()}"></td>
+            <td class="glycemie-date" th:text="${glycemie.getDate_of_Tracking()}"></td>
+            <td th:text="${glycemie.getTime()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
