@@ -19,9 +19,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-
-
-
 @Controller
 public class GlycemieController {
 
@@ -37,9 +34,9 @@ public class GlycemieController {
     }
 
     @PostMapping(value = "/save")
-    public String save(@RequestParam("date_of_Tracking") String date_of_Tracking,
+    public String save(@RequestParam("date_of_tracking") String date_of_Tracking,
                        @RequestParam("time_of_tracking") String time_of_tracking,
-                       @RequestParam("value_Glucose") String value_Glucose) {
+                       @RequestParam("value_glucose") String value_Glucose) {
 
 
         LocalDate date = LocalDate.parse(date_of_Tracking);
@@ -81,33 +78,46 @@ public class GlycemieController {
 
 
 
+
+
+
+
+
+
     @GetMapping("/graph")
     public String showGraph(Model model) {
         List<LectureGlycemie> lectures = Glycemie.ShowDiabetes();
         model.addAttribute("lectures", lectures);
-        return "Graph";
+        return "Add&ShowGlycemie";
     }
 
-    @RequestMapping("/filter")
+    @GetMapping("/filter")
     public String filter(@RequestParam("type") String type, Model model) {
         List<LectureGlycemie> lectures = Glycemie.ShowDiabetes();
-        LocalDate now = LocalDate.now();
+
         List<LectureGlycemie> filteredLectures;
 
-        if (type.equals("week")) {
+        if ("week".equals(type)) {
+            long oneWeekInMillis = 7L * 24 * 60 * 60 * 1000; // Milliseconds in a week
+            Date oneWeekAgo = new Date(System.currentTimeMillis() - oneWeekInMillis);
+
             filteredLectures = lectures.stream()
-                    .filter(lecture -> ((java.sql.Date) lecture.getDate_of_Tracking()).toLocalDate().isAfter(now.minusWeeks(1)))
+                    .filter(lecture -> lecture.getDate_of_Tracking().after(oneWeekAgo))
                     .collect(Collectors.toList());
-        } else if (type.equals("month")) {
+        } else if ("month".equals(type)) {
+            long oneMonthInMillis = 30L * 24 * 60 * 60 * 1000; // Milliseconds in a month
+            Date oneMonthAgo = new Date(System.currentTimeMillis() - oneMonthInMillis);
+
             filteredLectures = lectures.stream()
-                    .filter(lecture -> ((java.sql.Date) lecture.getDate_of_Tracking()).toLocalDate().isAfter(now.minusMonths(1)))
+                    .filter(lecture -> lecture.getDate_of_Tracking().after(oneMonthAgo))
                     .collect(Collectors.toList());
         } else {
-            filteredLectures = lectures;
+            filteredLectures = lectures; // Default to all lectures if type is not recognized
         }
 
         model.addAttribute("lectures", filteredLectures);
-        return "Add&ShowGlycemie";
+        return "Add&ShowGlycemie"; // Assuming "Add&ShowGlycemie" is your view name for displaying the filtered data
+    }
 
-}
+
 }
