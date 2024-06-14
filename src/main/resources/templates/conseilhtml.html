@@ -20,7 +20,7 @@
 
     <hr>
 
-    <!-- Liste des conseils -->
+
     <h2>Liste des Conseils</h2>
     <table class="table table-bordered">
         <thead>
@@ -32,13 +32,13 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Boucle sur les conseils pour les afficher -->
+
         <tr th:each="conseil : ${conseils}">
             <td th:text="${conseil.id}"></td>
             <td th:text="${conseil.message}"></td>
             <td th:text="${conseil.dateHeure}"></td>
             <td>
-                <!-- Formulaire pour supprimer un conseil -->
+
                 <form th:action="@{/conseils/{id}(id=${conseil.id})}" method="post">
                     <input type="hidden" name="_method" value="delete"/>
                     <button type="submit" class="btn btn-danger">Supprimer</button>
