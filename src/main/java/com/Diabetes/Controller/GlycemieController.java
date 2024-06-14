@@ -6,6 +6,7 @@ import com.Diabetes.Service.LectureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,11 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+
 
 
 @Controller
@@ -71,4 +77,37 @@ public class GlycemieController {
     }
 
 
+
+
+
+
+    @GetMapping("/graph")
+    public String showGraph(Model model) {
+        List<LectureGlycemie> lectures = Glycemie.ShowDiabetes();
+        model.addAttribute("lectures", lectures);
+        return "Graph";
+    }
+
+    @RequestMapping("/filter")
+    public String filter(@RequestParam("type") String type, Model model) {
+        List<LectureGlycemie> lectures = Glycemie.ShowDiabetes();
+        LocalDate now = LocalDate.now();
+        List<LectureGlycemie> filteredLectures;
+
+        if (type.equals("week")) {
+            filteredLectures = lectures.stream()
+                    .filter(lecture -> ((java.sql.Date) lecture.getDate_of_Tracking()).toLocalDate().isAfter(now.minusWeeks(1)))
+                    .collect(Collectors.toList());
+        } else if (type.equals("month")) {
+            filteredLectures = lectures.stream()
+                    .filter(lecture -> ((java.sql.Date) lecture.getDate_of_Tracking()).toLocalDate().isAfter(now.minusMonths(1)))
+                    .collect(Collectors.toList());
+        } else {
+            filteredLectures = lectures;
+        }
+
+        model.addAttribute("lectures", filteredLectures);
+        return "Add&ShowGlycemie";
+
+}
 }
