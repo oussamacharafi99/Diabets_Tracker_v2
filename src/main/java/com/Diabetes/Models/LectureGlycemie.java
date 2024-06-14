@@ -27,7 +27,6 @@ public class LectureGlycemie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     @Column
     private double valeur;
     @Column
@@ -67,6 +66,7 @@ public class LectureGlycemie {
     public void setDate_of_Tracking(Date date_of_Tracking) {
         Date_of_Tracking = date_of_Tracking;
     }
+
 
 
 
