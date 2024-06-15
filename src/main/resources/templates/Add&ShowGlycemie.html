@@ -60,10 +60,11 @@
         </thead>
         <tbody>
         <tr th:each="glycemie : ${Diabetes}">
-            <td th:text="${glycemie.getId()}"></td>
-            <td class="glycemie-value" th:text="${glycemie.getValeur()}"></td>
-            <td class="glycemie-date" th:text="${#dates.format(glycemie.getDate_of_Tracking(), 'yyyy-MM-dd')}"></td>
-            <td th:text="${glycemie.getTime()}"></td>
+            <td th:text="${glycemie.id}"></td>
+            <td class="glycemie-value" th:text="${glycemie.valeur}"></td>
+            <td class="glycemie-date" th:text="${glycemie.Date_of_Tracking}"></td>
+            <td th:text="${glycemie.time}"></td>
+          
         </tr>
         </tbody>
     </table>
