@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Valeurs Glycémies</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+            integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .odd-row {
+            background-color: #f2f2f2;
+        }
+
+        .even-row {
+            background-color: #ffffff;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+
+        .filter-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-form button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-form button:hover {
+            background-color: #0056b3;
+        }
+
+        canvas {
+            display: block;
+            margin: auto;
+        }
+
+        button#pdfButton {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button#pdfButton:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container" id="pdfContent">
+    <div>
+        <h2>Glucose Readings</h2>
+        <form class="filter-form" th:action="@{/chartDisplay}" method="get">
+            <button type="submit" name="view" value="week">Group by Week</button>
+            <button type="submit" name="view" value="month">Group by Month</button>
+            <button type="submit" name="view" value="year">Group by Year</button>
+            <br><br>
+            <label for="year">Year:</label>
+            <input type="number" id="year" name="year">
+            <label for="month">Month:</label>
+            <input type="number" id="month" name="month">
+            <label for="week">Week:</label>
+            <input type="number" id="week" name="week">
+            <button type="submit" name="view" value="specificMonth">Filter by Month</button>
+            <button type="submit" name="view" value="specificWeek">Filter by Week</button>
+        </form>
+        <canvas id="glucoseChart"></canvas>
+    </div>
+    <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
+    <table class="pdfG">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Valeur Glycémie</th>
+            <th>Date</th>
+            <th>Heure</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Boucle sur les données de glycémie -->
+        <tr th:each="glycemie, rowStatus : ${Diabetes}"
+            th:class="${rowStatus.odd}? 'odd-row' : 'even-row'">
+            <td th:text="${glycemie.getId()}"></td>
+            <td class="glycemie-value" th:text="${glycemie.getValeur()}"></td>
+            <td class="glycemie-date" th:text="${glycemie.getDate_of_Tracking()}"></td>
+            <td th:text="${glycemie.getTime()}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+<button id="pdfButton" onclick="generatePdf()">Export PDF</button>
+
+<script th:inline="javascript">
+    var labels = /*[[${labels}]]*/ [];
+    var data = /*[[${data}]]*/ [];
+
+    var ctx = document.getElementById('glucoseChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Niveau de glycémie',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+<script>
+    function generatePdf() {
+        const pdfElement = document.getElementById('pdfContent');
+        html2pdf().from(pdfElement).save('rapport_glycemie.pdf');
+    }
+</script>
+</body>
+
+</html>

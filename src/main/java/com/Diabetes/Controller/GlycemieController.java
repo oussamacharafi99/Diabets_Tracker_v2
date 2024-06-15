@@ -15,6 +15,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,8 +57,6 @@ public class GlycemieController {
     }
 
 
-
-
     @RequestMapping("/ShowInfo")
     public String show(Model model){
         // model.addAttribute("diabete",new GlucoseReading());
@@ -72,52 +71,56 @@ public class GlycemieController {
         model.addAttribute("Diabetes",  Glycemie.ShowDiabetes());
         return "Show";
     }
+    @GetMapping("/pdf")
 
-
-
-
-
-
-
-
-
-
-
-
-    @GetMapping("/graph")
-    public String showGraph(Model model) {
-        List<LectureGlycemie> lectures = Glycemie.ShowDiabetes();
-        model.addAttribute("lectures", lectures);
-        return "Add&ShowGlycemie";
+        public  String pdfG(Model model){
+            model.addAttribute("Diabetes" ,Glycemie.ShowDiabetes());
+            return "pdf";
+    }
+    @GetMapping("/chart")
+    public String chart(Model model) {
+        model.addAttribute("readings", Glycemie.getAllGroupedByWeek());
+        return "chart";
     }
 
-    @GetMapping("/filter")
-    public String filter(@RequestParam("type") String type, Model model) {
-        List<LectureGlycemie> lectures = Glycemie.ShowDiabetes();
+    @GetMapping("/chartDisplay")
+    public String getGlucoseReadings(
+            @RequestParam(value = "view", required = false, defaultValue = "week") String view,
+            @RequestParam(value = "year", required = false) Integer year,
+            @RequestParam(value = "month", required = false) Integer month,
+            @RequestParam(value = "week", required = false) Integer week,
+            Model model) {
+        model.addAttribute("Diabetes" ,Glycemie.ShowDiabetes());
+        List<LectureGlycemie> readings;
 
-        List<LectureGlycemie> filteredLectures;
-
-        if ("week".equals(type)) {
-            long oneWeekInMillis = 7L * 24 * 60 * 60 * 1000; // Milliseconds in a week
-            Date oneWeekAgo = new Date(System.currentTimeMillis() - oneWeekInMillis);
-
-            filteredLectures = lectures.stream()
-                    .filter(lecture -> lecture.getDate_of_Tracking().after(oneWeekAgo))
-                    .collect(Collectors.toList());
-        } else if ("month".equals(type)) {
-            long oneMonthInMillis = 30L * 24 * 60 * 60 * 1000; // Milliseconds in a month
-            Date oneMonthAgo = new Date(System.currentTimeMillis() - oneMonthInMillis);
-
-            filteredLectures = lectures.stream()
-                    .filter(lecture -> lecture.getDate_of_Tracking().after(oneMonthAgo))
-                    .collect(Collectors.toList());
-        } else {
-            filteredLectures = lectures; // Default to all lectures if type is not recognized
+        switch (view) {
+            case "month":
+                readings = Glycemie.getAllGroupedByMonth();
+                break;
+            case "year":
+                readings = Glycemie.getAllGroupedByYear();
+                break;
+            case "specificMonth":
+                readings = Glycemie.getByYearAndMonth(year, month);
+                break;
+            case "specificWeek":
+                readings = Glycemie.getByYearAndWeek(year, week);
+                break;
+            default:
+                readings = Glycemie.getAllGroupedByWeek();
         }
 
-        model.addAttribute("lectures", filteredLectures);
-        return "Add&ShowGlycemie"; // Assuming "Add&ShowGlycemie" is your view name for displaying the filtered data
-    }
+        List<String> labels = new ArrayList<>();
+        List<Double> data = new ArrayList<>();
 
+        for (LectureGlycemie reading : readings) {
+            labels.add(reading.getDate_of_Tracking().toString());
+            data.add(reading.getValeur());
+        }
+
+        model.addAttribute("labels", labels);
+        model.addAttribute("data", data);
+        return "pdf";
+    }
 
 }
