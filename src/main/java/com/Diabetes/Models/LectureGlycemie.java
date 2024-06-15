@@ -27,13 +27,13 @@ public class LectureGlycemie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     @Column
     private double valeur;
     @Column
     private Time time;
     @Column
     private Date Date_of_Tracking ;
+
 
 
 
