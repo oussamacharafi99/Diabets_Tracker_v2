@@ -35,9 +35,9 @@ public class GlycemieController {
     }
 
     @PostMapping(value = "/save")
-    public String save(@RequestParam("date_of_Tracking") String date_of_Tracking,
+    public String save(@RequestParam("date_of_tracking") String date_of_Tracking,
                        @RequestParam("time_of_tracking") String time_of_tracking,
-                       @RequestParam("value_Glucose") String value_Glucose) {
+                       @RequestParam("value_glucose") String value_Glucose) {
 
 
         LocalDate date = LocalDate.parse(date_of_Tracking);
@@ -55,8 +55,6 @@ public class GlycemieController {
 
         return "redirect:/Add";
     }
-
-
 
 
     @RequestMapping("/ShowInfo")
@@ -78,7 +76,6 @@ public class GlycemieController {
         public  String pdfG(Model model){
             model.addAttribute("Diabetes" ,Glycemie.ShowDiabetes());
             return "pdf";
-
     }
     @GetMapping("/chart")
     public String chart(Model model) {
@@ -125,4 +122,5 @@ public class GlycemieController {
         model.addAttribute("data", data);
         return "pdf";
     }
+
 }
