@@ -93,7 +93,7 @@ public class GlycemieController {
             @RequestParam(value = "month", required = false) Integer month,
             @RequestParam(value = "week", required = false) Integer week,
             Model model) {
-
+        model.addAttribute("Diabetes" ,Glycemie.ShowDiabetes());
         List<LectureGlycemie> readings;
 
         switch (view) {
@@ -123,6 +123,6 @@ public class GlycemieController {
 
         model.addAttribute("labels", labels);
         model.addAttribute("data", data);
-        return "index";
+        return "pdf";
     }
 }
