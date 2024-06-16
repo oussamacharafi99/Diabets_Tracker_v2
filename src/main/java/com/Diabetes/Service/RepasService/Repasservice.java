@@ -22,7 +22,10 @@ public class Repasservice {
         RepasRepos.save(Rp);
     }
 
-
+    @Transactional
+    public ArrayList<Repas> ShowRepas() {
+        return (ArrayList<Repas>) RepasRepos.findAll();
+    }
 
 
 

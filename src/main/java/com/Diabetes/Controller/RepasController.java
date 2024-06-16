@@ -24,6 +24,7 @@ public class RepasController {
     public String home(Model model) {
         model.addAttribute("repas", new Repas());
         model.addAttribute("Addrepas",  Repas.ShowRepas());
+
         return "Add&ShowRepas";
     }
 
@@ -55,7 +56,12 @@ public class RepasController {
     }
 
 
-
+    @RequestMapping("/showRepas")
+    public String ShowRepas(Model model){
+        // model.addAttribute("diabete",new GlucoseReading());
+        model.addAttribute("Repas",  Repas.ShowRepas());
+        return "Add&ShowRepas";
+    }
 
 
 
