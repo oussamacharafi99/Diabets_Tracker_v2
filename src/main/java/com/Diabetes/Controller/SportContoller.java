@@ -45,9 +45,9 @@ public class SportContoller {
 
     @RequestMapping("/addMovementToProgramme")
     public String addMovementToProgramme(Model model) {
-        // Supposons que l'utilisateur a l'ID 1 pour cet exemple
         Programme latestProgramme = serviceSport.getLatestProgramme(1);
         model.addAttribute("programme", latestProgramme);
+        model.addAttribute("movements", serviceSport.getMovements());
         return "Front_end_sport/addMovementToProgramme";
     }
 
