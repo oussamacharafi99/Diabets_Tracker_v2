@@ -8,7 +8,7 @@
 
 <body>
 <h2>Ajouter un Utilisateur</h2>
-<form action="/add" method="post" th:object="${user}">
+<form action="#" th:action="@{/users/add}" method="post" th:object="${user}">
     <label for="username">Nom d'utilisateur:</label>
     <input type="text" id="username" name="username" th:field="*{username}" required>
     <br>
@@ -30,7 +30,7 @@
     <button type="submit">Ajouter Utilisateur</button>
 </form>
 <br>
-<a href="/list">Retour à la Liste des Utilisateurs</a>
+<a th:href="@{/users}">Retour à la Liste des Utilisateurs</a>
 </body>
 
 </html>
