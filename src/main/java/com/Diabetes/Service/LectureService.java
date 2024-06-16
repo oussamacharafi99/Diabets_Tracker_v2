@@ -26,7 +26,7 @@ public class LectureService {
     }
 
     @Transactional
-    public ArrayList<LectureGlycemie> ShowDiabetes() {
+    public ArrayList<LectureGlycemie> ShowLectures() {
         return (ArrayList<LectureGlycemie>) lectureRepository.findAll();
 
     }
