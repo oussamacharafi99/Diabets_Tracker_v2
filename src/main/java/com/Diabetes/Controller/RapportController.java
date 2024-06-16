@@ -31,7 +31,8 @@ public class RapportController {
 
     @Autowired
     private UserService userService; // Assuming you have a UserService to fetch user details
-
+    @Autowired
+    private Repasservice repasservice;
     @GetMapping("/display")
     public String displayData(
             @RequestParam(value = "view", required = false, defaultValue = "week") String view,
@@ -43,7 +44,8 @@ public class RapportController {
         // Add Diabetes data
         List<LectureGlycemie> diabetes = glycemieService.ShowDiabetes();
         model.addAttribute("Diabetes", diabetes);
-
+       List<Repas> repas = repasservice.ShowRepas();
+        model.addAttribute("repas", repas);
         // Add User data (assuming user ID is 1 for demonstration)
         User user = userService.getUserById(1L);
         model.addAttribute("user", user);
