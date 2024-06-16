@@ -3,10 +3,12 @@ package com.Diabetes.Controller;
 import com.Diabetes.Models.Conseil;
 import com.Diabetes.Models.LectureGlycemie;
 import com.Diabetes.Models.Rapport;
+import com.Diabetes.Models.Repas.Repas;
 import com.Diabetes.Models.Users.User;
 import com.Diabetes.Service.ConseilsService;
 import com.Diabetes.Service.LectureService;
 import com.Diabetes.Service.RapportService;
+import com.Diabetes.Service.RepasService.Repasservice;
 import com.Diabetes.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +44,7 @@ public class RapportController {
             Model model) {
 
         // Add Diabetes data
-        List<LectureGlycemie> diabetes = glycemieService.ShowDiabetes();
+        List<LectureGlycemie> diabetes = glycemieService.ShowLectures();
         model.addAttribute("Diabetes", diabetes);
        List<Repas> repas = repasservice.ShowRepas();
         model.addAttribute("repas", repas);
