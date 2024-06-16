@@ -2,17 +2,15 @@ package com.Diabetes.Controller;
 
 import com.Diabetes.Models.Conseil;
 import com.Diabetes.Models.LectureGlycemie;
-import com.Diabetes.Models.Users.User;
 import com.Diabetes.Service.ConseilsService;
 import com.Diabetes.Service.LectureService;
-import com.Diabetes.Service.UserService.UserService;
+import com.Diabetes.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Controller

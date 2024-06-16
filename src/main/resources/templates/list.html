@@ -6,35 +6,28 @@
     <title>Liste des Utilisateurs</title>
 </head>
 
-<<<<<<< HEAD
-
-
-
-<button><a href="addPrograme">Create Progarame</a></button>
-=======
 <body>
 <h2>Liste des Utilisateurs</h2>
-<form action="/users/add" method="post">
-    <label for="nom">Nom:</label>
-    <input type="text" id="nom" name="nom" required>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <button type="submit">Ajouter Utilisateur</button>
-</form>
 <table>
     <thead>
     <tr>
         <th>ID</th>
-        <th>Nom</th>
+        <th>Nom d'utilisateur</th>
+        <th>Age</th>
         <th>Email</th>
+        <th>Taille (cm)</th>
+        <th>Poids (kg)</th>
         <th>Action</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="user : ${users}">
         <td th:text="${user.id}">1</td>
-        <td th:text="${user.nom}">John Doe</td>
+        <td th:text="${user.username}">John Doe</td>
+        <td th:text="${user.age}">30</td>
         <td th:text="${user.email}">john.doe@example.com</td>
+        <td th:text="${user.height}">175.5</td>
+        <td th:text="${user.weight}">70.0</td>
         <td>
             <a th:href="@{/users/edit/{id}(id=${user.id})}">Modifier</a>
             <a th:href="@{/users/delete/{id}(id=${user.id})}">Supprimer</a>
@@ -43,7 +36,6 @@
     </tbody>
 </table>
 <a href="/users/add">Ajouter un Utilisateur</a>
->>>>>>> d9bbb8b2df4b4b7e2e1490305750a26da6a4fcc7
 </body>
 
 </html>
