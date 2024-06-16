@@ -26,7 +26,7 @@ public class LectureService {
     }
 
     @Transactional
-    public ArrayList<LectureGlycemie> ShowDiabetes() {
+    public ArrayList<LectureGlycemie> ShowLectures() {
         return (ArrayList<LectureGlycemie>) lectureRepository.findAll();
 
     }
@@ -60,6 +60,10 @@ public class LectureService {
 
     public List<LectureGlycemie> getByYearAndMonth(int year, int month) {
         return lectureRepository.findByYearAndMonth(year, month);
-    }
 
+    @Transactional
+    public ArrayList<LectureGlycemie> ShowDiabetes() {
+        return (ArrayList<LectureGlycemie>) lectureRepository.findAll();
+
+    }
 }

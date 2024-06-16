@@ -30,7 +30,7 @@ public class GlycemieController {
     @RequestMapping(value = "/Add")
     public String home(Model model) {
         model.addAttribute("glucose", new LectureGlycemie());
-        model.addAttribute("Diabetes",  Glycemie.ShowDiabetes());
+        model.addAttribute("Diabetes",  Glycemie.ShowLectures());
         return "Add&ShowGlycemie";
     }
 
@@ -60,7 +60,7 @@ public class GlycemieController {
     @RequestMapping("/ShowInfo")
     public String show(Model model){
         // model.addAttribute("diabete",new GlucoseReading());
-        model.addAttribute("Diabetes",  Glycemie.ShowDiabetes());
+        model.addAttribute("Diabetes",  Glycemie.ShowLectures());
         return "Add&ShowGlycemie";
     }
 
@@ -68,13 +68,22 @@ public class GlycemieController {
     @RequestMapping("/delete")
     public String deleteInfos(@RequestParam("id") int idS, Model model) {
         Glycemie.delete(idS);
-        model.addAttribute("Diabetes",  Glycemie.ShowDiabetes());
-        return "Show";
+        model.addAttribute("Diabetes",  Glycemie.ShowLectures());
+        return "redirect:/Add";
     }
+
+
+
+
+
+
+    // Pratie de  Rapport :
+
+
     @GetMapping("/pdf")
 
         public  String pdfG(Model model){
-            model.addAttribute("Diabetes" ,Glycemie.ShowDiabetes());
+            model.addAttribute("Diabetes" ,Glycemie.ShowLectures());
             return "pdf";
     }
     @GetMapping("/chart")
@@ -90,7 +99,7 @@ public class GlycemieController {
             @RequestParam(value = "month", required = false) Integer month,
             @RequestParam(value = "week", required = false) Integer week,
             Model model) {
-        model.addAttribute("Diabetes" ,Glycemie.ShowDiabetes());
+        model.addAttribute("Diabetes" ,Glycemie.ShowLectures());
         List<LectureGlycemie> readings;
 
         switch (view) {
