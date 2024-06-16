@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/Graphique")
-public class GraphiqueController {
+@RequestMapping("/Rapport")
+public class RapportController {
     @Autowired
     private LectureService Glycemie;
     @Autowired
