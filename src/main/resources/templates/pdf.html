@@ -8,6 +8,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
             integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html-docx-js/0.4.0/html-docx.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -78,26 +80,77 @@
             margin: auto;
         }
 
-        button#pdfButton {
+        button#pdfButton, button#wordButton {
             display: block;
             margin: 20px auto;
             padding: 10px 20px;
-            background-color: #28a745;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
 
+        button#pdfButton {
+            background-color: #28a745;
+        }
+
         button#pdfButton:hover {
             background-color: #218838;
+        }
+
+        button#wordButton {
+            background-color: #007bff;
+        }
+
+        button#wordButton:hover {
+            background-color: #0056b3;
+        }
+
+        @media print {
+            /* Adjust margins and paddings to fit within pages */
+            body {
+                margin: 20px; /* Example margin */
+                padding: 0;
+            }
+
+            .container {
+                /* Adjust container size and layout */
+                width: 100%;
+                margin: 0;
+                padding: 10px;
+                border: none;
+            }
+
+            table {
+                /* Ensure tables fit within pages */
+                page-break-inside: auto;
+            }
+
+            /* Adjust other elements as necessary */
         }
     </style>
 </head>
 
 <body>
-<div class="container" id="pdfContent">
+<div class="container" id="content">
     <div>
+        <h2>Liste des Conseils</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Message</th>
+                <th>Date et Heure</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="conseil : ${conseils}">
+                <td th:text="${conseil.id}">1</td>
+                <td th:text="${conseil.message}">Exemple de message</td>
+                <td th:text="${conseil.dateHeure}">2024-06-15T12:00</td>
+            </tr>
+            </tbody>
+        </table>
         <h2>Glucose Readings</h2>
         <form class="filter-form" th:action="@{/chartDisplay}" method="get">
             <button type="submit" name="view" value="week">Group by Week</button>
@@ -123,25 +176,20 @@
             <th>Valeur Glycémie</th>
             <th>Date</th>
             <th>Heure</th>
-
         </tr>
         </thead>
         <tbody>
         <!-- Boucle sur les données de glycémie -->
-        <tr th:each="glycemie, rowStatus : ${Diabetes}"
-            th:class="${rowStatus.odd}? 'odd-row' : 'even-row'">
-            <td th:text="${glycemie.getId()}"></td>
-            <td class="glycemie-value" th:text="${glycemie.getValeur()}"></td>
-            <td class="glycemie-date" th:text="${glycemie.getDate_of_Tracking()}"></td>
-            <td th:text="${glycemie.getTime()}"></td>
-
+        <tr th:each="glycemie, rowStatus : ${Diabetes}" th:classappend="${rowStatus.odd}? 'odd-row' : 'even-row'">
+            <td th:text="${glycemie.id}">1</td>
+            <td class="glycemie-value" th:text="${glycemie.valeur}">5.5</td>
+            <td class="glycemie-date" th:text="${glycemie.date_of_Tracking}">2024-06-15</td>
+            <td th:text="${glycemie.time}">12:00</td>
         </tr>
         </tbody>
     </table>
-
-
 </div>
-
+<button id="wordButton" onclick="generateWord()">Export Word</button>
 <button id="pdfButton" onclick="generatePdf()">Export PDF</button>
 
 <script th:inline="javascript">
@@ -172,8 +220,14 @@
 </script>
 <script>
     function generatePdf() {
-        const pdfElement = document.getElementById('pdfContent');
+        const pdfElement = document.getElementById('content');
         html2pdf().from(pdfElement).save('rapport_glycemie.pdf');
+    }
+
+    function generateWord() {
+        const content = document.getElementById('content').outerHTML;
+        const converted = htmlDocx.asBlob(content);
+        saveAs(converted, 'rapport_glycemie.docx');
     }
 </script>
 </body>
