@@ -58,8 +58,8 @@ public class RepasController {
 
     @RequestMapping("/showRepas")
     public String ShowRepas(Model model){
-        // model.addAttribute("diabete",new GlucoseReading());
-        model.addAttribute("Repas",  Repas.ShowRepas());
+
+        model.addAttribute("Addrepas",  Repas.ShowRepas());
         return "Add&ShowRepas";
     }
 
