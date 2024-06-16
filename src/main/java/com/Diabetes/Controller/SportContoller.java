@@ -16,18 +16,21 @@ public class SportContoller {
     @Autowired
     ServiceSport serviceSport;
 
-    @RequestMapping("/")
-    public String test(Model model) {
-        List<ProgrammeAndMovementsDTO> programmeAndMovementsList = serviceSport.getProgrammeAndMovementsByProgrammeId(1);
+    @RequestMapping("/show_programme/{id}")
+    public String test(@PathVariable("id") Integer id, Model model) {
+        List<ProgrammeAndMovementsDTO> programmeAndMovementsList = serviceSport.getProgrammeAndMovementsByProgrammeId(id);
         model.addAttribute("programmeAndMovementsList", programmeAndMovementsList);
-        return "index";
+        model.addAttribute("programme", serviceSport.getProgrammeById(id));
+        return "Front_end_sport/showProgramme";
     }
 
 
     @RequestMapping("/sport")
     public String sport(Model model , Programme programme) {
+        model.addAttribute("programme", serviceSport.getPro());
         return "Front_end_sport/SportHome";
     }
+
     @RequestMapping("/addProgram")
     public String addprograme(Model model , Programme programme) {
         model.addAttribute("programme", programme);
