@@ -51,6 +51,9 @@ public class ServiceSport {
     public List<Programme> getPro() {
         return programmeRepository.findAll();
     }
+    public Programme getLatestProgramme(Integer userId){
+        return programmeRepository.findLatestProgrammeByUserId(userId);
+    }
 
     /* Section of Movements */
 
