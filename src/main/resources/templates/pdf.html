@@ -193,6 +193,40 @@
             <hr>
         </div>
     </div>
+    <div>
+        <div>
+            <div class="container mt-5">
+                <h2 class="mb-4">Liste des Repas</h2>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID du Repas</th>
+                        <th>ID</th>
+                        <th>Nom du Repas</th>
+                        <th>Description du Repas</th>
+                        <th>Description</th>
+                        <th>Glycides</th>
+                        <th>Type</th>
+                        <th>Ingrédients</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="repas : ${repas}">
+                        <td th:text="${repas.repasId}"></td>
+                        <td th:text="${repas.id}"></td>
+                        <td th:text="${repas.repasName}"></td>
+                        <td th:text="${repas.repasDescription}"></td>
+                        <td th:text="${repas.description}"></td>
+                        <td th:text="${repas.glycides}"></td>
+                        <td th:text="${repas.type}"></td>
+                        <td th:text="${repas.ingredients}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
 </div>
 </div>
 </div>
