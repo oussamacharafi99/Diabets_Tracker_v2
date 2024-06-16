@@ -3,7 +3,7 @@ package com.Diabetes.Controller;
 import com.Diabetes.Models.LectureGlycemie;
 import com.Diabetes.Models.Repas.Repas;
 import com.Diabetes.Service.RepasService.Repasservice;
-import com.Diabetes.Service.UserService.UserService;
+import com.Diabetes.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +18,8 @@ public class RepasController {
 
     @Autowired Repasservice Repas;
 
-    @Autowired UserService userService;
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value = "/addRepas")
     public String home(Model model) {

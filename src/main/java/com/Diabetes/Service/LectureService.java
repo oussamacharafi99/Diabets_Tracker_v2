@@ -61,4 +61,10 @@ public class LectureService {
     public List<LectureGlycemie> getByYearAndMonth(int year, int month) {
         return lectureRepository.findByYearAndMonth(year, month);
     }
+
+    @Transactional
+    public ArrayList<LectureGlycemie> ShowDiabetes() {
+        return (ArrayList<LectureGlycemie>) lectureRepository.findAll();
+
+    }
 }
