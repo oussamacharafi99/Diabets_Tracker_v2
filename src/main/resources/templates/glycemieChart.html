@@ -22,10 +22,10 @@
     const config = {
         type: 'line',
         data: {
-            labels: [], // À remplir avec les dates
+            labels: [],
             datasets: [{
                 label: 'Niveau de glycémie',
-                data: [], // À remplir avec les valeurs de glycémie
+                data: [],
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 yAxisID: 'y',
@@ -55,9 +55,8 @@
     };
     const glycemieChart = new Chart(ctx, config);
 
-    // Fonction pour mettre à jour les données du graphique
+
     function updateChartData(filterType) {
-        // Appel à votre backend pour obtenir les données filtrées
         fetch(`/getGlycemieData?filter=${filterType}`)
             .then(response => response.json())
             .then(data => {
@@ -67,12 +66,10 @@
             });
     }
 
-    // Gestionnaire d'événement pour le filtre
     document.getElementById('filter').addEventListener('change', function() {
         updateChartData(this.value);
     });
 
-    // Charger les données initiales pour la semaine
     updateChartData('week');
 </script>
 </body>
