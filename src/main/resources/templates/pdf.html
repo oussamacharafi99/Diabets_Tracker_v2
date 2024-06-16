@@ -225,7 +225,18 @@
                 </table>
             </div>
         </div>
-
+    </div>
+     <h2>Liste des Programmes</h2>
+    <div th:each="programme : ${programme}">
+        <div>
+            <p><strong>ID:</strong> <span th:text="${programme.id}"></span></p>
+            <p><strong>Nom du Programme:</strong> <span th:text="${programme.name}"></span></p>
+            <p><strong>Date de Début:</strong> <span th:text="${programme.startDate}"></span></p>
+            <p><strong>Heures:</strong> <span th:text="${programme.heurs}"></span></p>
+            <p><strong>Date de Fin:</strong> <span th:text="${programme.endDate}"></span></p>
+            <p><strong>Description:</strong> <span th:text="${programme.description}"></span></p>
+        </div>
+        <hr>
     </div>
 </div>
 </div>
