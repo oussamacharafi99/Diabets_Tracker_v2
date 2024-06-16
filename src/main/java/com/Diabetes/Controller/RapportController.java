@@ -49,7 +49,7 @@ public class RapportController {
         // Add User data (assuming user ID is 1 for demonstration)
         User user = userService.getUserById(1L);
         model.addAttribute("user", user);
-
+        model.addAttribute("programme", serviceSport.getPro());
         // Add Conseils data
         List<Conseil> conseils = conseilsService.tousLesConseils();
         model.addAttribute("conseils", conseils);
