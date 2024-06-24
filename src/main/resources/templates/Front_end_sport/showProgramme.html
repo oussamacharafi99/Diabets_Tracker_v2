@@ -3,28 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/addMovements.css">
 </head>
 <body>
-<h1>Programme and Movements</h1>
-<ul>
 
-    <p>Programme ID: <span th:text="${programme.id}"></span></p>
-    <p>Programme Name: <span th:text="${programme.name}"></span></p>
-    <p>Start Date: <span th:text="${programme.startDate}"></span></p>
-    <p>Heurs: <span th:text="${programme.heurs}"></span></p>
-    <p>End Date: <span th:text="${programme.endDate}"></span></p>
-    <p>Description: <span th:text="${programme.description}"></span></p>
-
-    <li th:each="pm : ${programmeAndMovementsList}">
-        <div>
-            <h2>Movement Details</h2>
-            <p>Movement ID: <span th:text="${pm.movementId}"></span></p>
-            <p>Movement Name: <span th:text="${pm.movementName}"></span></p>
-            <p>Image: <img th:src="@{${pm.image}}" alt="Image"/></p>
-            <p>Description: <span th:text="${pm.movementDescription}"></span></p>
+<!-- MENU BAR -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="/images/Logo.png" width="100%" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-lg-auto">
+                <li class="nav-item">
+                    <a href="/sport" class="nav-link smoothScroll">Home</a>
+                </li>
+            </ul>
+            <ul class="social-icon ml-lg-3">
+                <li><a href="https://fb.com/tooplate" class="fa fa-facebook"></a></li>
+                <li><a href="#" class="fa fa-twitter"></a></li>
+                <li><a href="#" class="fa fa-instagram"></a></li>
+            </ul>
         </div>
-    </li>
-</ul>
+    </div>
+</nav>
 
+<div class="container">
+    <!-- Programme Details -->
+    <div>
+        <h1>Programme Details</h1>
+        <ul>
+            <li>Programme ID: <span th:text="${programme != null ? programme.id : ''}"></span></li>
+            <li>Programme Name: <span th:text="${programme != null ? programme.name : ''}"></span></li>
+            <li>Start Date: <span th:text="${programme != null ? programme.startDate : ''}"></span></li>
+            <li>End Date: <span th:text="${programme != null ? programme.endDate : ''}"></span></li>
+            <li>Description: <span th:text="${programme != null ? programme.description : ''}"></span></li>
+        </ul>
+    </div>
+
+    <!-- Programme and Movements List -->
+    <div>
+        <h1>Movements</h1>
+        <ul th:if="${programmeAndMovementsList != null}">
+            <li th:each="pm : ${programmeAndMovementsList}">
+                <div>
+                    <h2>Movement Details</h2>
+                    <ul>
+                        <li>Movement ID: <span th:text="${pm != null ? pm.movementId : ''}"></span></li>
+                        <li>Movement Name: <span th:text="${pm != null ? pm.movementName : ''}"></span></li>
+                        <li>Image: <img th:src="@{${pm != null ? pm.image : ''}}" alt="Image"></li>
+                        <li>Description: <span th:text="${pm != null ? pm.movementDescription : ''}"></span></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <p th:unless="${programmeAndMovementsList != null}">No movements found.</p>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/aos.js"></script>
+<script src="js/smoothscroll.js"></script>
+<script src="js/custom.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import com.Diabetes.Repository.SportRepository.ProgrammeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,6 +24,9 @@ public class ServiceSport {
     private MovementsRepository movementsRepository;
 
     public void saveProMov(ProgrammeMovements programmeMovements) {
+        if (programmeMovements.getProgramme() == null || programmeMovements.getMovements() == null) {
+            throw new IllegalArgumentException("saving not good !");
+        }
         programmeMovementsRepository.save(programmeMovements);
     }
 
@@ -58,6 +62,8 @@ public class ServiceSport {
     public Programme getProgrammeById(Integer programmeId) {
         return programmeRepository.findById(programmeId).orElseThrow();
     }
+
+
 
     /* Section of Movements */
 

@@ -23,9 +23,26 @@
         }, 1000);
         event.preventDefault();
       });
-    });    
+    });
   });
 
 
-    
+  const cards = document.querySelectorAll(".mov-card");
+  const forPppUp2 = document.querySelector(".forPppUp");
+  const  cancel = document.getElementById("cancel");
+  const movement_id = document.querySelector(".movement_id");
+  cards.forEach((card, index) => {
+    const addbtn = card.querySelector(".btnAdd");
+    addbtn.addEventListener("click" , ()=>{
+      movement_id.value = addbtn.value;
+      console.log(movement_id.value);
+      forPppUp2.style.display = "flex";
+
+    })
+    cancel.addEventListener("click" , ()=>{
+      forPppUp2.style.display = "none";
+    })
+
+  });
+
 
