@@ -14,11 +14,19 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #333;
         }
 
         h2 {
             text-align: center;
             color: #333;
+            font-size: 18px;
+        }
+
+        p {
+            margin: 5px 0;
         }
 
         table {
@@ -34,6 +42,7 @@
         th, td {
             padding: 8px;
             text-align: center;
+            font-size: 12px;
         }
 
         th {
@@ -70,6 +79,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 12px;
         }
 
         .filter-form button:hover {
@@ -89,6 +99,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 12px;
         }
 
         button#pdfButton {
@@ -130,71 +141,53 @@
 
 <body>
 <div id="exportTContent">
-<div id="exportContent">
-<div class="container" id="content">
-    <div>
-        <h2>Liste des Rapports</h2>
-        <div>
-            <h2>Liste des Rapports</h2>
-            <div th:each="rapport : ${rapports}">
+    <div id="exportContent">
+        <div class="container" id="content">
+            <div>
                 <div>
-                    <p><strong>ID:</strong> <span th:text="${rapport.id}"></span></p>
-                    <p><strong>Date de Génération:</strong> <span th:text="${rapport.dateGeneration}"></span></p>
-                    <p><strong>Contenu:</strong> <span th:text="${rapport.contenu}"></span></p>
+                    <h2>Liste des Rapports</h2>
+                    <div th:each="rapport : ${rapports}">
+                        <div>
+                            <p><strong>ID:</strong> <span th:text="${rapport.id}"></span></p>
+                            <p><strong>Date de Génération:</strong> <span th:text="${rapport.dateGeneration}"></span></p>
+                            <p><strong>Contenu:</strong> <span th:text="${rapport.contenu}"></span></p>
+                        </div>
+                        <hr>
+                    </div>
                 </div>
-                <hr>
+                <h2>Détails de l'Utilisateur</h2>
+                <p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
+                <p><strong>Nom d'utilisateur:</strong> <span th:text="${user.username}"></span></p>
+                <p><strong>Age:</strong> <span th:text="${user.age}"></span></p>
+                <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+                <p><strong>Taille (cm):</strong> <span th:text="${user.height}"></span></p>
+                <p><strong>Poids (kg):</strong> <span th:text="${user.weight}"></span></p>
+                <h2>Liste des Conseils</h2>
+                <div th:each="conseil : ${conseils}">
+                    <div>
+                        <p><strong>ID:</strong> <span th:text="${conseil.id}"></span></p>
+                        <p><strong>Message:</strong> <span th:text="${conseil.message}"></span></p>
+                        <p><strong>Date et Heure:</strong> <span th:text="${conseil.dateHeure}"></span></p>
+                    </div>
+                    <hr>
+                </div>
+                <h2>Glucose Readings</h2>
+                <form class="filter-form" th:action="@{/chartDisplay}" method="get">
+                    <button type="submit" name="view" value="week">Group by Week</button>
+                    <button type="submit" name="view" value="month">Group by Month</button>
+                    <button type="submit" name="view" value="year">Group by Year</button>
+                    <br><br>
+                    <label for="year">Year:</label>
+                    <input type="number" id="year" name="year">
+                    <label for="month">Month:</label>
+                    <input type="number" id="month" name="month">
+                    <label for="week">Week:</label>
+                    <input type="number" id="week" name="week">
+                    <button type="submit" name="view" value="specificMonth">Filter by Month</button>
+                    <button type="submit" name="view" value="specificWeek">Filter by Week</button>
+                </form>
+                <canvas id="glucoseChart"></canvas>
             </div>
-        </div>
-        <h2>Détails de l'Utilisateur</h2>
-        <p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
-        <p><strong>Nom d'utilisateur:</strong> <span th:text="${user.username}"></span></p>
-        <p><strong>Age:</strong> <span th:text="${user.age}"></span></p>
-        <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
-        <p><strong>Taille (cm):</strong> <span th:text="${user.height}"></span></p>
-        <p><strong>Poids (kg):</strong> <span th:text="${user.weight}"></span></p>
-        <h2>Liste des Conseils</h2>
-        <h2>Liste des Conseils</h2>
-        <div th:each="conseil : ${conseils}">
-            <div>
-                <p><strong>ID:</strong> <span th:text="${conseil.id}"></span></p>
-                <p><strong>Message:</strong> <span th:text="${conseil.message}"></span></p>
-                <p><strong>Date et Heure:</strong> <span th:text="${conseil.dateHeure}"></span></p>
-            </div>
-            <hr>
-        </div>
-        <h2>Glucose Readings</h2>
-        <form class="filter-form" th:action="@{/chartDisplay}" method="get">
-            <button type="submit" name="view" value="week">Group by Week</button>
-            <button type="submit" name="view" value="month">Group by Month</button>
-            <button type="submit" name="view" value="year">Group by Year</button>
-            <br><br>
-            <label for="year">Year:</label>
-            <input type="number" id="year" name="year">
-            <label for="month">Month:</label>
-            <input type="number" id="month" name="month">
-            <label for="week">Week:</label>
-            <input type="number" id="week" name="week">
-            <button type="submit" name="view" value="specificMonth">Filter by Month</button>
-            <button type="submit" name="view" value="specificWeek">Filter by Week</button>
-        </form>
-        <canvas id="glucoseChart"></canvas>
-    </div>
-    <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
-    <h2>Glucose Readings</h2>
-    <div>
-        <!-- Boucle sur les données de glycémie -->
-        <div th:each="glycemie : ${Diabetes}">
-            <div>
-                <p><strong>ID:</strong> <span th:text="${glycemie.id}"></span></p>
-                <p><strong>Valeur Glycémie:</strong> <span th:text="${glycemie.valeur}"></span></p>
-                <p><strong>Date:</strong> <span th:text="${glycemie.date_of_Tracking}"></span></p>
-                <p><strong>Heure:</strong> <span th:text="${glycemie.time}"></span></p>
-            </div>
-            <hr>
-        </div>
-    </div>
-    <div>
-        <div>
             <div class="container mt-5">
                 <h2 class="mb-4">Liste des Repas</h2>
                 <table class="table table-bordered">
@@ -216,33 +209,46 @@
                         <td th:text="${repas.id}"></td>
                         <td th:text="${repas.repasName}"></td>
                         <td th:text="${repas.repasDescription}"></td>
-                        <td th:text="${repas.description}"></td>
-                        <td th:text="${repas.glycides}"></td>
+                        <td th:text="${repas.Description}"></td>
+                        <td th:text="${repas.glicydes}"></td>
                         <td th:text="${repas.type}"></td>
-                        <td th:text="${repas.ingredients}"></td>
+                        <td th:text="${repas.Ingredients}"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+            <h2>Liste des Programmes</h2>
+            <div th:each="programme : ${programme}">
+                <div>
+                    <p><strong>ID:</strong> <span th:text="${programme.id}"></span></p>
+                    <p><strong>Nom du Programme:</strong> <span th:text="${programme.name}"></span></p>
+                    <p><strong>Date de Début:</strong> <span th:text="${programme.startDate}"></span></p>
+                    <p><strong>Heures:</strong> <span th:text="${programme.heurs}"></span></p>
+                    <p><strong>Date de Fin:</strong> <span th:text="${programme.endDate}"></span></p>
+                    <p><strong>Description:</strong> <span th:text="${programme.description}"></span></p>
+                </div>
+                <hr>
+            </div>
+            <div>
+                <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
+                <h2>Glucose Readings</h2>
+                <div>
+                    <!-- Boucle sur les données de glycémie -->
+                    <div th:each="glycemie : ${Diabetes}">
+                        <div>
+                            <p><strong>ID:</strong> <span th:text="${glycemie.id}"></span></p>
+                            <p><strong>Valeur Glycémie:</strong> <span th:text="${glycemie.valeur}"></span></p>
+                            <p><strong>Date:</strong> <span th:text="${glycemie.date_of_Tracking}"></span></p>
+                            <p><strong>Heure:</strong> <span th:text="${glycemie.time}"></span></p>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-     <h2>Liste des Programmes</h2>
-    <div th:each="programme : ${programme}">
-        <div>
-            <p><strong>ID:</strong> <span th:text="${programme.id}"></span></p>
-            <p><strong>Nom du Programme:</strong> <span th:text="${programme.name}"></span></p>
-            <p><strong>Date de Début:</strong> <span th:text="${programme.startDate}"></span></p>
-            <p><strong>Heures:</strong> <span th:text="${programme.heurs}"></span></p>
-            <p><strong>Date de Fin:</strong> <span th:text="${programme.endDate}"></span></p>
-            <p><strong>Description:</strong> <span th:text="${programme.description}"></span></p>
-        </div>
-        <hr>
-    </div>
 </div>
-</div>
-</div>
-<button id="wordButton" onclick="generateWord()">Export Word</button>
-<button id="pdfButton" onclick="generatePdf()">Export PDF</button>
+
 <!-- Button to export as .doc -->
 <button onclick="Export2Word('exportContent');">Export as .doc</button>
 
@@ -291,7 +297,7 @@
     }
 
 
-        function generateWord() {
+    function generateWord() {
         const content = document.getElementById('content').outerHTML;
         const converted = htmlDocx.asBlob(content);
         saveAs(converted, 'rapport_glycemie.docx');

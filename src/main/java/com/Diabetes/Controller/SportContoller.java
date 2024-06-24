@@ -1,8 +1,8 @@
 package com.Diabetes.Controller;
-import com.Diabetes.Models.Sport.Programme;
-import com.Diabetes.Models.Sport.ProgrammeAndMovementsDTO;
+import com.Diabetes.Models.Sport.*;
 import com.Diabetes.Service.ServiceSport.ServiceSport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +16,13 @@ public class SportContoller {
     @Autowired
     ServiceSport serviceSport;
 
-    @RequestMapping("/show_programme/{id}")
-    public String test(@PathVariable("id") Integer id, Model model) {
+    @RequestMapping("/show_programme")
+    public String programme(@Param("id") Integer id, Model model) {
         List<ProgrammeAndMovementsDTO> programmeAndMovementsList = serviceSport.getProgrammeAndMovementsByProgrammeId(id);
         model.addAttribute("programmeAndMovementsList", programmeAndMovementsList);
         model.addAttribute("programme", serviceSport.getProgrammeById(id));
         return "Front_end_sport/showProgramme";
     }
-
 
     @RequestMapping("/sport")
     public String sport(Model model , Programme programme) {
@@ -38,7 +37,7 @@ public class SportContoller {
     }
 
     @PostMapping("/saveProgramme")
-    public String save(@ModelAttribute("programme") Programme programme, Model model ) {
+    public String save(@ModelAttribute("programme") Programme programme ) {
         serviceSport.savePro(programme);
         return "redirect:/addMovementToProgramme";
     }
@@ -50,6 +49,25 @@ public class SportContoller {
         model.addAttribute("movements", serviceSport.getMovements());
         return "Front_end_sport/addMovementToProgramme";
     }
+    @PostMapping("/addMovementToProgram")
+    public String addMovementToProgram(@RequestParam("programme_id") Integer programmeId, @RequestParam("movement_id") Integer movementId) {
+        Programme programme = serviceSport.getProgrammeById(programmeId);
+        Movements movement = serviceSport.getMovements().stream()
+                .filter(m -> m.getId().equals(movementId))
+                .findFirst()
+                .orElseThrow();
 
+        PM pmId = new PM(programmeId, movementId);
+        ProgrammeMovements programmeMovements = new ProgrammeMovements(pmId, programme, movement);
+        serviceSport.saveProMov(programmeMovements);
+        return "redirect:/addMovementToProgramme";
+    }
 
+    @RequestMapping("/programmes")
+    public List<Programme> programmeCalendar() {
+        for (Programme programme : serviceSport.getPro()){
+            System.out.println(programme.getDescription());
+        }
+        return serviceSport.getPro();
+    }
 }
