@@ -32,13 +32,13 @@ public class ConseilsService {
     public void genererConseils(LectureGlycemie glycemie) {
         List<Conseil> nouveauxConseils = new ArrayList<>();
 
-        // Exemple de règles pour générer des conseils
+
         if (glycemie.getValeur() > 180) {
-            nouveauxConseils.add(new Conseil(null, "Votre niveau de glycémie est élevé. Réduisez votre consommation de sucre.", LocalDateTime.now(), glycemie));
+            nouveauxConseils.add(new Conseil(null, "Your blood sugar level is high. Reduce your sugar intake.", LocalDateTime.now(), glycemie));
         } else if (glycemie.getValeur() < 70) {
-            nouveauxConseils.add(new Conseil(null, "Votre niveau de glycémie est bas. Consommez des glucides rapides.", LocalDateTime.now(), glycemie));
+            nouveauxConseils.add(new Conseil(null, "Your blood sugar level is low. Consume fast-acting carbohydrates.", LocalDateTime.now(), glycemie));
         } else {
-            nouveauxConseils.add(new Conseil(null, "Votre niveau de glycémie est normal. Continuez à suivre vos habitudes actuelles.", LocalDateTime.now(), glycemie));
+            nouveauxConseils.add(new Conseil(null, "Your blood sugar level is normal. Continue following your current habits.", LocalDateTime.now(), glycemie));
         }
 
         conseilRepositry.saveAll(nouveauxConseils);
