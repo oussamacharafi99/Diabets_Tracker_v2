@@ -16,7 +16,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="index.html">
-            <img src="/images/Logo.png" width="100%" alt="Logo">
+            <img src="/images/2.png" width="100%" alt="Logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,7 +29,7 @@
                 </li>
             </ul>
             <ul class="social-icon ml-lg-3">
-                <li><a href="https://fb.com/tooplate" class="fa fa-facebook"></a></li>
+                <li><a href="#" class="fa fa-facebook"></a></li>
                 <li><a href="#" class="fa fa-twitter"></a></li>
                 <li><a href="#" class="fa fa-instagram"></a></li>
             </ul>
@@ -38,8 +38,8 @@
 </nav>
 
 <div class="container">
-    <!-- Programme Details -->
-    <div>
+
+    <div class="show-programme">
         <h1>Programme Details</h1>
         <ul>
             <li>Programme ID: <span th:text="${programme != null ? programme.id : ''}"></span></li>
@@ -48,22 +48,19 @@
             <li>End Date: <span th:text="${programme != null ? programme.endDate : ''}"></span></li>
             <li>Description: <span th:text="${programme != null ? programme.description : ''}"></span></li>
         </ul>
+        <button class="delete-programme">Remove this Program</button>
     </div>
 
-    <!-- Programme and Movements List -->
-    <div>
+    <div class="show-movements">
         <h1>Movements</h1>
         <ul th:if="${programmeAndMovementsList != null}">
             <li th:each="pm : ${programmeAndMovementsList}">
-                <div>
-                    <h2>Movement Details</h2>
                     <ul>
-                        <li>Movement ID: <span th:text="${pm != null ? pm.movementId : ''}"></span></li>
-                        <li>Movement Name: <span th:text="${pm != null ? pm.movementName : ''}"></span></li>
-                        <li>Image: <img th:src="@{${pm != null ? pm.image : ''}}" alt="Image"></li>
-                        <li>Description: <span th:text="${pm != null ? pm.movementDescription : ''}"></span></li>
+                        <li id="img-li"><img th:src="@{${pm != null ? pm.image : ''}}" alt="Image" width="100%" height="100%"></li>
+                        <!--<li>Movement ID: <span th:text="${pm != null ? pm.movementId : ''}"></span></li>-->
+                        <li><span class="titreM" th:text="${pm != null ? pm.movementName : ''}"></span></li>
+                        <li><span class="descriptionM" th:text="${pm != null ? pm.movementDescription : ''}"></span></li>
                     </ul>
-                </div>
             </li>
         </ul>
         <p th:unless="${programmeAndMovementsList != null}">No movements found.</p>

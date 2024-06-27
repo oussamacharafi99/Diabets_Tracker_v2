@@ -18,4 +18,5 @@ public interface ProgrammeMovementsRepository extends JpaRepository<ProgrammeMov
             "INNER JOIN pm.movements m " +
             "WHERE p.id = :programmeId")
 List<ProgrammeAndMovementsDTO> findProgrammeAndMovementsByProgrammeId(@Param("programmeId") Integer programmeId);
+
 }
