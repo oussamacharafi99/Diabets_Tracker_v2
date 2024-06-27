@@ -1,6 +1,5 @@
 package com.Diabetes.Controller;
 import com.Diabetes.Models.Sport.*;
-import com.Diabetes.Repository.SportRepository.ProgrammeRepository;
 import com.Diabetes.Service.ServiceSport.ServiceSport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -17,7 +16,6 @@ public class SportContoller {
     @Autowired
     ServiceSport serviceSport;
 
-
     @RequestMapping("/show_programme")
     public String programme(@Param("id") Integer id, Model model) {
         List<ProgrammeAndMovementsDTO> programmeAndMovementsList = serviceSport.getProgrammeAndMovementsByProgrammeId(id);
@@ -29,7 +27,6 @@ public class SportContoller {
     @RequestMapping("/sport")
     public String sport(Model model , Programme programme) {
         model.addAttribute("programme", serviceSport.getPro());
-        serviceSport.deletePro(3);
         return "Front_end_sport/SportHome";
     }
 

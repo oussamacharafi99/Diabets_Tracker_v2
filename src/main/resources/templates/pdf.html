@@ -145,38 +145,33 @@
         <div class="container" id="content">
             <div>
                 <div>
-                    <h5>Liste des Rapports</h5>
+                    <h2>Liste des Rapports</h2>
                     <div th:each="rapport : ${rapports}">
                         <div>
-                            <p>
-                                <strong>ID:</strong> <span th:text="${rapport.id}"></span>,
-                                <strong>Date de Génération:</strong> <span th:text="${rapport.dateGeneration}"></span>,
-                                <strong>Contenu:</strong> <span th:text="${rapport.contenu}"></span>
-                            </p>
+                            <p><strong>ID:</strong> <span th:text="${rapport.id}"></span></p>
+                            <p><strong>Date de Génération:</strong> <span th:text="${rapport.dateGeneration}"></span></p>
+                            <p><strong>Contenu:</strong> <span th:text="${rapport.contenu}"></span></p>
                         </div>
                         <hr>
                     </div>
                 </div>
-                <h5>Détails de l'Utilisateur</h5>
-                <p>
-                    <strong>ID:</strong> <span th:text="${user.id}"></span>,
-                    <strong>Nom d'utilisateur:</strong> <span th:text="${user.username}"></span>,
-                    <strong>Age:</strong> <span th:text="${user.age}"></span>,
-                    <strong>Email:</strong> <span th:text="${user.email}"></span>,
-                    <strong>Taille (cm):</strong> <span th:text="${user.height}"></span>,
-                    <strong>Poids (kg):</strong> <span th:text="${user.weight}"></span>
-                </p>
-
-                <h5>Liste des Conseils</h5>
+                <h2>Détails de l'Utilisateur</h2>
+                <p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
+                <p><strong>Nom d'utilisateur:</strong> <span th:text="${user.username}"></span></p>
+                <p><strong>Age:</strong> <span th:text="${user.age}"></span></p>
+                <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
+                <p><strong>Taille (cm):</strong> <span th:text="${user.height}"></span></p>
+                <p><strong>Poids (kg):</strong> <span th:text="${user.weight}"></span></p>
+                <h2>Liste des Conseils</h2>
                 <div th:each="conseil : ${conseils}">
-                    <p>
-                        <strong>ID:</strong> <span th:text="${conseil.id}"></span>,
-                        <strong>Message:</strong> <span th:text="${conseil.message}"></span>,
-                        <strong>Date et Heure:</strong> <span th:text="${conseil.dateHeure}"></span>
-                    </p>
+                    <div>
+                        <p><strong>ID:</strong> <span th:text="${conseil.id}"></span></p>
+                        <p><strong>Message:</strong> <span th:text="${conseil.message}"></span></p>
+                        <p><strong>Date et Heure:</strong> <span th:text="${conseil.dateHeure}"></span></p>
+                    </div>
                     <hr>
                 </div>
-                <h5>Glucose Readings</h5>
+                <h2>Glucose Readings</h2>
                 <form class="filter-form" th:action="@{/chartDisplay}" method="get">
                     <button type="submit" name="view" value="week">Group by Week</button>
                     <button type="submit" name="view" value="month">Group by Month</button>
@@ -193,74 +188,68 @@
                 </form>
                 <canvas id="glucoseChart"></canvas>
             </div>
-
-            <h5 class="mb-4">Liste des Repas</h5>
-            <div class="row">
-                <div th:each="repas : ${repas}" class="col-md-12">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>ID du Repas:</strong> <span th:text="${repas.repasId}"></span>
-                                <strong>ID:</strong> <span th:text="${repas.id}"></span>,
-                                <strong>Nom du Repas:</strong> <span th:text="${repas.repasName}"></span>,
-                                <strong>Description du Repas:</strong> <span th:text="${repas.repasDescription}"></span>,
-                                <strong>Description:</strong> <span th:text="${repas.Description}"></span>,
-                                <strong>Glycides:</strong> <span th:text="${repas.glicydes}"></span>,
-                                <strong>Type:</strong> <span th:text="${repas.type}"></span>,
-                                <strong>Ingrédients:</strong> <span th:text="${repas.Ingredients}"></span>
-                            </p>
+            <div class="container mt-5">
+                <h2 class="mb-4">Liste des Repas</h2>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID du Repas</th>
+                        <th>ID</th>
+                        <th>Nom du Repas</th>
+                        <th>Description du Repas</th>
+                        <th>Description</th>
+                        <th>Glycides</th>
+                        <th>Type</th>
+                        <th>Ingrédients</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="repas : ${repas}">
+                        <td th:text="${repas.repasId}"></td>
+                        <td th:text="${repas.id}"></td>
+                        <td th:text="${repas.repasName}"></td>
+                        <td th:text="${repas.repasDescription}"></td>
+                        <td th:text="${repas.Description}"></td>
+                        <td th:text="${repas.glicydes}"></td>
+                        <td th:text="${repas.type}"></td>
+                        <td th:text="${repas.Ingredients}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2>Liste des Programmes</h2>
+            <div th:each="programme : ${programme}">
+                <div>
+                    <p><strong>ID:</strong> <span th:text="${programme.id}"></span></p>
+                    <p><strong>Nom du Programme:</strong> <span th:text="${programme.name}"></span></p>
+                    <p><strong>Date de Début:</strong> <span th:text="${programme.startDate}"></span></p>
+                    <p><strong>Heures:</strong> <span th:text="${programme.heurs}"></span></p>
+                    <p><strong>Date de Fin:</strong> <span th:text="${programme.endDate}"></span></p>
+                    <p><strong>Description:</strong> <span th:text="${programme.description}"></span></p>
+                </div>
+                <hr>
+            </div>
+            <div>
+                <h2 class="mb-4">Liste des Valeurs Glycémies</h2>
+                <h2>Glucose Readings</h2>
+                <div>
+                    <!-- Boucle sur les données de glycémie -->
+                    <div th:each="glycemie : ${Diabetes}">
+                        <div>
+                            <p><strong>ID:</strong> <span th:text="${glycemie.id}"></span></p>
+                            <p><strong>Valeur Glycémie:</strong> <span th:text="${glycemie.valeur}"></span></p>
+                            <p><strong>Date:</strong> <span th:text="${glycemie.date_of_Tracking}"></span></p>
+                            <p><strong>Heure:</strong> <span th:text="${glycemie.time}"></span></p>
                         </div>
+                        <hr>
                     </div>
                 </div>
             </div>
-
-
-
-
-            <h5>Liste des Programmes</h5>
-            <div class="row">
-                <div th:each="programme : ${programme}" class="col-md-12 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>ID: </strong> <span th:text="${programme.id}"></span>,
-                                <strong>Nom du Programme:</strong> <span th:text="${programme.name}"></span>,
-                                <strong>Date de Début:</strong> <span th:text="${programme.startDate}"></span>,
-                                <strong>Heures:</strong> <span th:text="${programme.heurs}"></span>,
-                                <strong>Date de Fin:</strong> <span th:text="${programme.endDate}"></span>,
-                                <strong>Description:</strong> <span th:text="${programme.description}"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h5 class="mb-4">Liste des Valeurs Glycémies</h5>
-            <div class="row">
-                <div th:each="glycemie : ${Diabetes}" class="col-md-12 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-text">
-                                <strong>ID: </strong> <span th:text="${glycemie.id}"></span>,
-                                <strong>Valeur Glycémie:</strong> <span th:text="${glycemie.valeur}"></span>,
-                                <strong>Date:</strong> <span th:text="${glycemie.date_of_Tracking}"></span>,
-                                <strong>Heure:</strong> <span th:text="${glycemie.time}"></span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
-    <button onclick="window.location.href='/rapport/export/word';">Export as .doc</button>
-
-    <button onclick="window.location.href='/rapport/export/pdf';">Export as PDF</button>
-
 </div>
 
-
+<!-- Button to export as .doc -->
 <button onclick="Export2Word('exportContent');">Export as .doc</button>
 
 
@@ -269,8 +258,10 @@
 
 <button onclick="Export2Word('exportContent', 'word-content.docx');">Export as .docx</button>
 
+<!-- Button to export as PDF -->
 <button onclick="Export2PDF('exportTContent');">Export as PDF</button>
 
+<!-- Button to export as PDF with a specific filename -->
 <button onclick="Export2PDF('exportTContent', 'pdf-content');">Export as PDF</button>
 
 <script th:inline="javascript">
@@ -366,7 +357,7 @@
         };
 
         // Perform the html2pdf conversion
-        html2pdf().from(content).save();
+        html2pdf().from(content).set(opt).save();
     }
 
 </script>
