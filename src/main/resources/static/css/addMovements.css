@@ -36,7 +36,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
 }
 
 :root {
-    --primary-color: #2a8f8f;
+    --primary-color:        #f13a11;
     --white-color:          #ffffff;
     --dark-color:           #171819;
     --about-bg-color:       #f9f9f9;
@@ -69,7 +69,6 @@ https://www.tooplate.com/view/2119-gymso-fitness
 body {
     background: var(--white-color);
     font-family: var(--base-font-family);
-    height: 100vh;
 }
 
 
@@ -761,7 +760,7 @@ body{
     padding: 10px;
     background: var(--primary-color);
     border-radius: 5px;
-    margin: 3px;
+    margin-top: 15px;
 }
 .programme > p > span{
     color: white;
@@ -906,63 +905,4 @@ body{
     background: var(--dark-color);
     color: white;
     border: 2px solid var(--dark-color);
-}
-.show-programme > h1{
-    color: white;
-}
-.show-programme > ul{
-    margin-left: 40px;
-}
-.show-programme > ul > li {
-    color: var(--gray-color);
-}
-.show-programme > ul > li > span{
-    color: var(--primary-color);
-}
-.show-movements{
-    padding: 20px 0;
-}
-.show-movements > h1{
-    color: white;
-}
-.show-movements > ul{
-    width: 90%;
-    margin: 0 auto;
-    overflow-x: auto;
-    display: flex;
-}
-.show-movements > ul > li > ul{
-    width: 300px;
-    height: 300px;
-    background: #222;
-    margin: 3px;
-}
-.show-movements > ul > li > ul > #img-li{
-    width: 100%;
-    height: 200px;
-}
-.show-movements > ul > li > ul{
-    padding: 10px;
-    list-style: none;
-}
-.show-movements > ul > li > ul > li > .titreM{
-    color: white;
-}
-.show-movements > ul > li > ul > li > .descriptionM{
-    color: var(--gray-color);
-}
-.delete-programme{
-    padding: 5px 10px;
-    border-radius: 7px;
-    background: transparent;
-    color: var(--primary-color);
-    font-size: 16px;
-    border: 2px solid var(--primary-color);
-    cursor: pointer;
-    transition: .5s;
-}
-.delete-programme:hover{
-    color: white;
-    background: var(--primary-color);
-    border: 2px solid transparent;
 }

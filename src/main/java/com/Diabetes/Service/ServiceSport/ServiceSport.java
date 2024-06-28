@@ -45,9 +45,6 @@ public class ServiceSport {
     public void deleteProMov(ProgrammeMovements programmeMovements) {
         programmeMovementsRepository.delete(programmeMovements);
     }
-    public void deletePro(Integer programmeId) {
-        programmeRepository.deleteById(programmeId);
-    }
 
     /* Section of Programme */
 
